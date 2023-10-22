@@ -77,10 +77,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'CLIENT': {
-            'host': 'mongodb+srv://yurii:mongodbtestuser@clustertest.7rbirat.mongodb.net/?retryWrites=true&w=majority',
+            'host': 'mongodb+srv://<username>:<password>@clustertest.7rbirat.mongodb.net/?retryWrites=true&w=majority',
             'name': 'evoballballDB',
-            'username': 'yurii',
-            'password': 'mongodbtestuser',
+            'username': <username>,
+            'password': <password>,
             'authMechanism': 'SCRAM-SHA-1'
         }
     }
