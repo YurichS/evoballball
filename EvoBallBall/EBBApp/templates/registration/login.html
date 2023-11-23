@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5 ">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card ">
+                <div class="card-body">
+                    <h2 class="card-title text-center">Login</h2>
+                    <form action="{% url 'login' %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <div class="form-control">
+                                {% if form.errors %}
+                                <div class="invalid-feedback">
+                                    {{ form.errors.error }}
+                                </div>
+                                {% endif %}
+                                {{form.as_p}}
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg w-100 mt-1 ">Login</button>
+                    </form>
+                    <div class="text-center mt-3">
+                        <p><a href="{% url 'register' %}">Sign Up</a> | <a href="{% url 'password_reset' %}">Forgot
+                            Password</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

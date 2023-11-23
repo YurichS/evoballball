@@ -1,0 +1,57 @@
+body {
+    background: no-repeat center center fixed;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+
+header {
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    top: 0;
+    background-color: #ff9933;
+}
+
+main {
+    margin-top: 100px;
+    padding-bottom: 5px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    color: red;
+}
+
+.header-img {
+    height: 80px;
+}
+
+.sale-label {
+    text-align: center;
+    font-family: Courier New;
+    font-size: xx-large;
+    font-weight: bold;
+
+}
+
+.product-desc {
+    opacity: 0.8;
+    padding-left: 5px;
+    padding-bottom: 5px;
+}
+
+.comments {
+    opacity: 0.8;
+}
+
+.ta-comment {
+    resize: none;
+    width: 400px;
+    height: 150px;
+    margin-bottom: 5px;
+}

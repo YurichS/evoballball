@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="container mt-4">
+    <div class="row">
+        <div class="col-md-4">
+            <img src="{{product.image.url}}" alt="Product image"
+                 style="width: 100%; height: 100%; align-content: center;">
+        </div>
+        <div class="col-md-6 bg-secondary product-desc">
+            <h1 class="text-warning">{{product.name}}</h1>
+            <h3 class="text-dark">Price: ${{product.price}}</h3>
+            <h4 class="">{{product.description}}</h4>
+            <h5 class="mb-3">Size: {{product.size}}</h5>
+            <a href="{% if request.user.is_authenticated %} /order/{{product.id}} {% else %} {%url 'login'%}{%endif%}" class="btn btn-outline-warning btn-lg">Order</a>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <h2 class="text-white">Comments</h2>
+
+        {% for comment in comments%}
+        <div class="comments bg-light col-4 rounded px-2">
+            <h3>User: {{comment.created_by}}</h3>
+            <h2>{{comment.comment}}</h2>
+        </div>
+        {%endfor%}
+        {% if request.user.is_authenticated %}
+        <form action="" class="d-flex" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <textarea name='comment' class="form-control ta-comment"></textarea>
+                <button class="btn btn-outline-warning form-control" type="submit">Add comment</button>
+            </div>
+        </form>
+        {%endif%}
+    </div>
+</main>
+
+
+{% endblock %}

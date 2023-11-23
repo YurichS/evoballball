@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5 bg-body">
+    <h2 class="text-center">{{request.user.first_name}} {{request.user.last_name}}'s orders</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-9 text-center">
+            {% if orders %}
+            <table class="table table-bordered">
+                <thread>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thread>
+                <tbody>
+                {% for order in orders%}
+                {% if order.status != 3%}
+                <tr>
+                    <td><a href="{{order.product.get_absolute_url}}">{{order.product}}</a></td>
+                    <td>
+                        <form method="POST" action="{{order.product.id}}/">
+                            {% csrf_token %}
+                            <input type="number" name="quantity" value="{{order.quantity}}" min="1" max="10">
+                            <input type="submit" value="Update">
+                        </form>
+                    </td>
+
+                    <td>{{order.product.price}} $</td>
+                    <td>{{order.get_status_display}}</td>
+                    <td>
+                        <form action="delete/{{order.id}}"><input type="submit" value="Delete"></form>
+                    </td>
+                </tr>
+                {%endif%}
+                {%endfor%}
+                <tr>
+                    <td colspan="4" class="text-center">Total</td>
+                    <td colspan="2" class="text-center">{{total}} $</td>
+                </tr>
+                </tbody>
+            </table>
+            <a href="{% url 'done_order' %}" class="btn btn-success w-50 mb-1">Buy Now!</a>
+            {% else %}
+            <h2 class="text-center">You have not orders</h2>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{%endblock%}

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!--<h1>{{request.user.first_name}} {{request.user.last_name}}</h1>-->
+<!--<hr>-->
+
+<!--{% if form.errors %}-->
+<!--<p>{{ form.errors.error }}</p>-->
+<!--{% endif %}-->
+
+<!--<form action="{% url 'user_details' %}" method="post">-->
+<!--    {% csrf_token %}-->
+<!--    {{form.as_p}}-->
+<!--    <button type="submit" class="btn btn-success">submit</button>-->
+<!--</form>-->
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title text-center">{{request.user.first_name}} {{request.user.last_name}}</h2>
+                    <div class="form-group">
+                        <form action="{% url 'user_details' %}" method="post">
+                            {% csrf_token %}
+                            {{form.as_p}}
+                            <button type="submit" class="btn btn-success w-100 mb-1">Submit</button>
+                        </form>
+                    </div>
+                    <a href="{% url 'logout' %}" class="btn btn-success w-100">Log Out</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5 bg-body col-9">
+    <h2 class="text-center">Orders History</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Order date</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td><a href="{{order.product.get_absolute_url}}">{{order.product}}</a></td>
+                    <td>{{ order.quantity }}</td>
+                    <td>{{order.product.price}} $</td>
+                    <td>{{order.created_at.date}}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
